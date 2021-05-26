@@ -47,6 +47,9 @@ components: {
             if (verificacion_autorizada != true) {
                     alert("No se admiten solicitudes no autorizadas");
                     }else{ 
+                        // limpiamos el array para que no se acomulen peticiones anteriores
+                        this.array_hecho=[]
+                        //--fin
                         var rm_pscpet_valor = KitPassive.buscar_Match(/C\d{10,}(?=\n)/, valor_Textoarea);
                         var rm_pscpet_result = "RM*PSCPETVIAJE-" + rm_pscpet_valor;
                         this.array_hecho.push(rm_pscpet_result);

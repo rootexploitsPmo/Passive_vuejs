@@ -231,7 +231,7 @@ grid-column: 2;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
     border-radius: 13%;
     border: solid 0px;
-    background: url(https://passives.000webhostapp.com/home.svg);
+    background: url(../../imagenes/home.svg);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-   <router-link to="/">  <img :src="src" alt=""> </router-link>
+   <router-link to="/">  <img src="../imagenes/passive.svg" alt=""> </router-link>
    <div class="titulo">
 <h1 >{{titulo}}</h1>
     </div>
@@ -17,7 +17,7 @@ export default {
   },
 data() {
     return {
-        src: 'https://passives.000webhostapp.com/passive.svg'
+      
     }
 },
 props: {

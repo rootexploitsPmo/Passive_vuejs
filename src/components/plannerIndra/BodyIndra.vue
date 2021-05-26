@@ -34,7 +34,9 @@ components: {
     GetData(dato) {
 
        var valor_Textoarea=dato;
-
+        //limpiamos el array para no a comular peticiones anteriores
+          this.array_hecho=[];
+        //--fin
        //PRIMER RM 
       var rm_pscpet_valor=KitPassive.buscar_Match(/C\d{10,}(?=\n)/,valor_Textoarea)
       var rm_pscpet_result="RM*PSCPETVIAJE-"+rm_pscpet_valor
