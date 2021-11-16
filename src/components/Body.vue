@@ -40,8 +40,8 @@ export default {
     ],
     aereo:[
       {
-         titulo:'Ryanair',
-            url:'/ryanair'
+         titulo:'Remarks LCC',
+            url:'/remarkslcc'
       },{
         titulo:'Vueling',
         url:'/vueling'

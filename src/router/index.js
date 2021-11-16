@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import Expedia from '../views/Expedia.vue'
 import Renfe from '../views/Renfe.vue'
 import Sbb from '../views/Sbb.vue'
-import Ryanair from '../views/Ryanair.vue'
+import Remarkslcc from '../views/Remarkslcc.vue'
 import Vueling from '../views/Vueling.vue'
 import G200 from '../views/G200.vue'
 import PlannerIndra from '../views/PlannerIndra.vue'
@@ -34,9 +34,9 @@ const routes = [
     component: Sbb
   },
   {
-    path: '/ryanair',
-    name: 'ryanair',
-    component: Ryanair
+    path: '/remarkslcc',
+    name: 'remarkslcc',
+    component: Remarkslcc
   },{
     path: '/vueling',
     name: 'vueling',

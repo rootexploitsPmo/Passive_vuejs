@@ -1,6 +1,7 @@
 <template>
   <div class="ContenedorPrincipal">
         <div class="rutas">
+             <div @click="load"  class="iraTras">BACK</div>
 <InputData @accion='GetData'/>
   </div>
    <div class="respuesta_Ryanair">
@@ -9,7 +10,7 @@
         <tbody><tr><td style="font-size: 25px; text-align: center;">IDA</td></tr>
         <tr>
             <td>Compañía</td>
-            <td id="compa">FR</td>
+            <td id="compa">VY</td>
         </tr>
         <tr>
             <td>Nº de Vuelo</td>
@@ -184,6 +185,9 @@ components: {
  InputData,
  BotonCopiar
 },methods: {
+    load(){
+       location.reload();
+    },
   GetData(data){
 // RESETEAMOS EL ARRAY SS PARA QUE NO SE QUEDEN GUARDADOS LOS DATOS DE LA 'SESION' ANTERIOR 
 this.array_SS=[]
@@ -192,7 +196,7 @@ this.array_SS=[]
  var valor_textoArea=data;
 
 // Obtenemos todos los datos que necesitamos del texto introducido por el usuario
-    var numeros_vuelo=valor_textoArea.match(/FR\d{1,}(?=\n)/g);
+    var numeros_vuelo=valor_textoArea.match(/(FR|VY)\d{1,}(?=\n)/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=Número de reserva\:\n).*/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\w{1,}\s{0,}\-\s{0,})\d{2}\:\d{2}\n/g);
     var input_ciudad=valor_textoArea.match(/(?<=Llegada.*\n).*/g)
@@ -441,5 +445,22 @@ display: flex;
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
+}
+.iraTras{
+   width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ffffff;
+    font-family: 'Heebo', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    position: absolute;
+    left: 12px;
+    top: 87%;
+    transform: scale(.8);
+    cursor: pointer;
 }
 </style>
