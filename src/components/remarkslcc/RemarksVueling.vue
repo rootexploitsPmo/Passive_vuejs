@@ -204,7 +204,12 @@ this.array_SS=[]
     var horas_vuelos=valor_textoArea.match(/(?<=\t{0,})\d{2}\:\d{2}/g);
     var input_ciudad=valor_textoArea.match(/(?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()\w{3,}(?=\)\:(\n|))/g)
     var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}/g)
-    var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
+    // var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
+     var numeroPersona=prompt("Número de pasajeros");
+     //ESTE CAMPO ES OBLIGATORIO POR LO QUE SI NO SE COMPLETA NO PODRÁ CONTINUAR
+    if(numeroPersona===null||numeroPersona===''){
+        return
+    }
     var importeBruto=KitPassive.buscar_Match(/(?<=Importe\:)\d{1,}(\,\d{1,}|\.\d{1,}|)/,valor_textoArea)
     //preguntamos si en el importe hay un punto o una coma para remplazar en caso de que  haya coma por un punto.
     var delimitador=/\,/.test(importeBruto);
@@ -216,7 +221,7 @@ this.array_SS=[]
     let ida_fechaDeSalida=fechas[0]
     let ida_ciudadSalida=input_ciudad[0]
     let ida_ciudadLlegada=input_ciudad[1]
-    let ida_numeroPasajeros=numeroPersona.length
+    let ida_numeroPasajeros=numeroPersona
     let ida_horaDeSalida=horas_vuelos[0]
     let ida_horaDeLlegada= horas_vuelos[1]
     let ida_localizador=localizador_v
@@ -255,7 +260,7 @@ this.Ida.Localizador=ida_localizador
                 let Vuelta_fechaDeSalida=fechas[1]
                 let Vuelta_ciudadSalida=input_ciudad[2]
                 let Vuelta_ciudadLlegada=input_ciudad[3]
-                let Vuelta_numeroPasajeros=numeroPersona.length
+                let Vuelta_numeroPasajeros=numeroPersona
                 let Vuelta_horaDeSalida=horas_vuelos[1]
                 let Vuelta_horaDeLlegada= horas_vuelos[2]
                 let Vuelta_localizador=localizador_v
