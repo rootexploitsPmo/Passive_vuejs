@@ -1,7 +1,7 @@
 <template>
  <div>
      
- <Header titulo="REMARKS LCC"/>
+ <Header titulo="VY / FR NO BSP"/>
  <div id="alertSeleccion" :style="reactivo">
     <p @click="ryanair">Ryanair</p>
     <p  @click="vueling">Vueling</p>
