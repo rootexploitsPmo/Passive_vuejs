@@ -1,7 +1,7 @@
 <template>
   <div class="ContenedorPrincipal">
         <div class="rutas">
-             <div @click="load"  class="iraTras">BACK</div>
+             <!-- <div @click="load"  class="iraTras">BACK</div> -->
 <InputData @accion='GetData'/>
   </div>
    <div class="respuesta_Ryanair">
