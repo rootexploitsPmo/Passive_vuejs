@@ -40,7 +40,7 @@ export default {
     ],
     aereo:[
       {
-         titulo:'Remarks LCC',
+         titulo:'VY / FR NO BSP',
             url:'/remarkslcc'
       },{
         titulo:'Vueling',
