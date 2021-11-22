@@ -10,49 +10,49 @@
         <tbody><tr><td style="font-size: 25px; text-align: center;">IDA</td></tr>
         <tr>
             <td>Compañía</td>
-            <td id="compa">FR</td>
+            <td id="compa">VY</td>
         </tr>
         <tr>
             <td>Nº de Vuelo</td>
-            <td>{{numeroVuelo}}</td>
+            <td>{{Ida.numeroVuelo}}</td>
         </tr>
         <tr>
             <td>Fecha de Salida
             </td>
-            <td >{{fechaSalida}}</td>
+            <td >{{Ida.fechaSalida}}</td>
         </tr>
         <tr>
             <td>Ciudad de Salida
             </td>
-            <td>{{ciudadSalida}}</td>
+            <td>{{Ida.ciudadSalida}}</td>
         </tr>
         <tr>
             <td>Ciudad de llegada</td>
-            <td>{{ciudadLlegada}}</td>
+            <td>{{Ida.ciudadLlegada}}</td>
         </tr>
         <tr>
             <td>Numero de Pasajeros</td>
-            <td >{{numeroPasajero}}</td>
+            <td style="padding-left:15px">{{Ida.numeroPasajero}}</td>
         </tr>
         <tr>
             <td>Hora de salida
             </td>
-            <td >{{horaSalida}}</td>
+            <td >{{Ida.horaSalida}}</td>
         </tr>
         <tr>
             <td>Hora de llegada</td>
-            <td>{{horaLlegada}}</td>
+            <td>{{Ida.horaLlegada}}</td>
         </tr>
         <tr>
             <td>Localizador</td>
-            <td>{{Localizador}}</td>
+            <td>{{Ida.Localizador}}</td>
         </tr>
     </tbody></table>
     <table  :style="activar">
             <tbody><tr><td style="font-size: 25px; text-align: center;">VUELTA</td></tr>
             <tr>
                 <td>Compañía</td>
-                <td>FR</td>
+                <td>VY</td>
             </tr>
             <tr>
                 <td>Nº de Vuelo</td>
@@ -74,7 +74,7 @@
             </tr>
             <tr>
                 <td>Numero de Pasajeros</td>
-                <td>{{Vuelta.numeroPasajeros}}</td>
+                <td style="padding-left:15px">{{Vuelta.numeroPasajero}}</td>
             </tr>
             <tr>
                 <td>Hora de salida</td>
@@ -104,7 +104,7 @@
        
         <tr>
             <td>Importe Bruto</td>
-            <td>{{importeBruto}}</td>
+            <td>{{Segmentos.importeBruto}}</td>
         </tr>
         <tr>
             <td>RM*PSCREF-</td>
@@ -148,6 +148,7 @@ import KitPassive from '../../modulos/KitPassive'
 export default {
     data() {
       return {
+        Ida:{
         numeroVuelo: '',
         fechaSalida:'',
         ciudadSalida:'',
@@ -156,7 +157,8 @@ export default {
         horaSalida:'',
         horaLlegada:'',
         Localizador:'',
-        importeBruto: '',
+       
+        },
         Vuelta:{
         Satatus:false,
         numeroVuelo: '',
@@ -167,11 +169,12 @@ export default {
         horaSalida:'',
         horaLlegada:'',
         Localizador:'',
-        importeBruto: '',
+       
         },
         array_SS:[],
         Segmentos:{
           numeroSegmento: '',
+           importeBruto: '',
           PSCREF:'',
           FPCC:'',
           Sobremision:'',
@@ -199,12 +202,129 @@ this.array_SS=[]
     var numeros_vuelo=valor_textoArea.match(/(VY)\d{1,}(?=\n)/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=Código de Reserva\:\s{2,}).*/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\t{0,})\d{2}\:\d{2}/g);
-    var input_ciudad=valor_textoArea.match(/(?<=\w{1,}\s{1,}\()\w{3,}/g)
+    var input_ciudad=valor_textoArea.match(/(?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()\w{3,}(?=\)\:(\n|))/g)
     var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}/g)
     var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
-    
+    var importeBruto=KitPassive.buscar_Match(/(?<=Importe\:)\d{1,}(\,\d{1,}|\.\d{1,}|)/,valor_textoArea)
+    //preguntamos si en el importe hay un punto o una coma para remplazar en caso de que  haya coma por un punto.
+    var delimitador=/\,/.test(importeBruto);
+        if(delimitador){
+                importeBruto=importeBruto.replace(",",".");
+                        }
+//Declaramos las variables para tener un lectura mas facil del codigo.
+    let ida_numeroVuelo=numeros_vuelo[0]
+    let ida_fechaDeSalida=fechas[0]
+    let ida_ciudadSalida=input_ciudad[0]
+    let ida_ciudadLlegada=input_ciudad[1]
+    let ida_numeroPasajeros=numeroPersona.length
+    let ida_horaDeSalida=horas_vuelos[0]
+    let ida_horaDeLlegada= horas_vuelos[1]
+    let ida_localizador=localizador_v
+// asignamos las variables a la tabla que se mostrará al usurio.
+this.Ida.numeroVuelo=ida_numeroVuelo
+this.Ida.fechaSalida=ida_fechaDeSalida
+this.Ida.ciudadSalida=ida_ciudadSalida
+this.Ida.ciudadLlegada=ida_ciudadLlegada
+this.Ida.numeroPasajero=ida_numeroPasajeros
+this.Ida.horaSalida=ida_horaDeSalida
+this.Ida.horaLlegada=ida_horaDeLlegada
+this.Ida.Localizador=ida_localizador
 
+// CONTRUIMOS LOS SEGMENTOS SS
+
+        //TRATAMOS LAS FECHAS PARA CAMBIAR SU FORMATO PAR QUE SEA ADMISIBLE PARA AMADEUS.
+           let fechaIdaAmadeus=KitPassive.TransforDate(fechas[0])  
+           
+        //QUITAMOS LOS PUNTOS DE LA HORA
+         ida_horaDeSalida=ida_horaDeSalida.replace(":",'')
+        ida_horaDeLlegada=ida_horaDeLlegada.replace(":","")
+
+                //CREACIÓN DE LINEA SS
+                var LineaIda="SS"+ida_numeroVuelo+"Y"+fechaIdaAmadeus+ida_ciudadSalida+ida_ciudadLlegada+"GK"+ida_numeroPasajeros+"/"+ida_horaDeSalida+ida_horaDeLlegada+"/"+ida_localizador;//GK numero de pasajeros (entre ciudad y  /)
+            //REALIZAMOS EL PUSH  EN EL ARRAY QUE GUARDA LAS LINEAS QUE SE COPIARAN.
+
+                this.array_SS.push(LineaIda)
+
+
+//CREAMOS UNA VALIDACIÓN PARA DETERMINAR SI HAY VUELTA EN LA RESERVA 
+            //USAREMOS LA VARIBLE FECHAS PARA VER EL RANGO DEL ARRAY SI ES MAYOR A 1 SIGNIFICA QUE HAY VUELTA TAMBIEN , SI SOLO ES 1 SIGNIFICA QUE SOLO HAY IDA.
+            if(fechas.length > 1){
+                //activamos la tabla para que sea visible(se complementa con computed)
+                this.Vuelta.Satatus=true
+                 let Vuelta_numeroVuelo=numeros_vuelo[1]
+                let Vuelta_fechaDeSalida=fechas[1]
+                let Vuelta_ciudadSalida=input_ciudad[2]
+                let Vuelta_ciudadLlegada=input_ciudad[3]
+                let Vuelta_numeroPasajeros=numeroPersona.length
+                let Vuelta_horaDeSalida=horas_vuelos[1]
+                let Vuelta_horaDeLlegada= horas_vuelos[2]
+                let Vuelta_localizador=localizador_v
+                //ASIGNAMOS LAS VARIABLES AL CUADRO DE VUELTA PARA QUE SE AVISIBLES PARA EL USUARIO.
+                this.Vuelta.numeroVuelo=Vuelta_numeroVuelo
+                this.Vuelta.numeroVuelo=Vuelta_numeroVuelo
+                this.Vuelta.fechaSalida=Vuelta_fechaDeSalida
+                this.Vuelta.ciudadSalida=Vuelta_ciudadSalida
+                this.Vuelta.ciudadLlegada=Vuelta_ciudadLlegada
+                this.Vuelta.numeroPasajero=Vuelta_numeroPasajeros
+                this.Vuelta.horaSalida=Vuelta_horaDeSalida
+                this.Vuelta.horaLlegada=Vuelta_horaDeLlegada
+                this.Vuelta.Localizador=Vuelta_localizador
+
+                   //TRATAMOS LAS FECHAS PARA CAMBIAR SU FORMATO PAR QUE SEA ADMISIBLE PARA AMADEUS.
+                  let fechaVueltaAmadeus=KitPassive.TransforDate(fechas[1])    
+
+
+                     //QUITAMOS LOS PUNTOS DE LA HORA
+                 Vuelta_horaDeSalida=Vuelta_horaDeSalida.replace(":",'')
+                 Vuelta_horaDeLlegada=Vuelta_horaDeLlegada.replace(":","")
+
+
+            var LineaVuelta="SS"+Vuelta_numeroVuelo+"Y"+fechaVueltaAmadeus+Vuelta_ciudadSalida+Vuelta_ciudadLlegada+"GK"+Vuelta_numeroPasajeros+"/"+Vuelta_horaDeSalida+Vuelta_horaDeLlegada+"/"+Vuelta_localizador;//GK numero de pasajeros (entre ciudad y  /)
+            
+            // //CREACIÓN DE LINEA SS VUELTA
+            this.array_SS.push(LineaVuelta)
+
+            }else{
+                 this.Vuelta.Satatus=false
+            }
+
+
+
+//IMPORTE  EN EL APARTADO DE SEGMENTOS 
+this.Segmentos.importeBruto=importeBruto
+  },Getsegmentos(){
+    //CREAMOS LOS EGMENTOS
+    let importeBruto=this.Segmentos.importeBruto
+   var rmacc="RM*ACC"+this.Ida.Localizador+"/S"+this.Segmentos.numeroSegmento;
+  var rmacempn="RM*ACEMPN-"+this.Ida.Localizador+"/S"+this.Segmentos.numeroSegmento;
+  var rmacempa="RM*ACEMPA-VY/S"+this.Segmentos.numeroSegmento;
+  var rmacevo="RM*ACELVO-HO/s"+this.Segmentos.numeroSegmento;
+  var rmacesal="RM*ACESAL-"+importeBruto+"/S"+this.Segmentos.numeroSegmento;
+this.array_segmentos.push(rmacc,rmacempn,rmacempa,rmacesal);
+
+  var rmacecom="RM*ACECOM-00.00"+"/S"+this.Segmentos.numeroSegmento;
+  var pscscom="RM*PSCSCOM-"+this.Segmentos.Sobremision+"/S"+this.Segmentos.numeroSegmento;
+  var rmacesup="RM*ACESUP-VY/s"+this.Segmentos.numeroSegmento;
+  var rmpscref_texto="RM*PSCREF-"+this.Segmentos.PSCREF+"/s"+this.Segmentos.numeroSegmento; 
+  var fpcc_texto="FPCC"+this.Segmentos.FPCC;
+  var acempt ="RM*ACEMPT-00.00/s"+this.Segmentos.numeroSegmento;
+  var acecom = "RM*ACECOM-00.00/s"+this.Segmentos.numeroSegmento;
+  
+  if(this.Segmentos.PSCREF===""){
+    rmpscref_texto=""
+} 
+
+    if(this.Segmentos.FPCC===""){
+        fpcc_texto=""
+    } 
+  if(this.Segmentos.Sobremision!=""){
+    this.array_segmentos.push(pscscom,rmacecom,rmacesup,rmacevo,rmpscref_texto,fpcc_texto,acempt,acecom);
+  }else{
+    this.array_segmentos.push(rmacesup,rmpscref_texto,rmacevo,fpcc_texto,acempt,acecom)
   }
+  this.array_segmentos=[]
+
+}
 },computed: {
   activar(){
    return [this.Vuelta.Satatus ? {'display': 'inline-table'} : {'display':' none'} ]

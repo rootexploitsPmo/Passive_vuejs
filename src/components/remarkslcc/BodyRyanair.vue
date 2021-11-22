@@ -205,7 +205,7 @@ this.array_SS=[]
     
     var fechas=valor_textoArea.match(/\d{2}\/\d{2}\/\d{4}/g);
     var Numero_pasajeros=valor_textoArea.match(/(Sr|Sra)(?=\s{0}(\.|))/g);
-    var Importe_bruto_v=KitPassive.buscar_Match(/(?<=Recibo\:\n.*\n)\d{1,}\.\d{1,}(?=\s{0,}\w{1,}\n)/,valor_textoArea);
+    var Importe_bruto_v=KitPassive.buscar_Match(/(?<=Recibo\:\n.*\n)\d{1,}(\.|\,)\d{1,}(?=\s{0,}\w{1,}\n)/,valor_textoArea);
                                       Importe_bruto_v=Importe_bruto_v.replace(",",".");
                                         var importeBruto=parseFloat(Importe_bruto_v);
 // Obtenemos todos los datos que necesitamos del texto introducido por el usuario

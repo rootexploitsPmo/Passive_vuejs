@@ -1,5 +1,26 @@
 export default {
                     //ESTA FUNCION NOS SIRVE PARA CREAR UN TEXTO 
+
+     TransforDate(date){
+        let dia=this.buscar_Match(/^\d{2}/,date)
+        let mes=this.buscar_Match(/(?<=^\d{2}\/)\d{2}/,date)
+        let year=this.buscar_Match(/(?<=^\d{2}\/\d{2}\/)\d{4}/,date)
+        let array_fechas=[];
+        array_fechas["01"]="JAN";
+        array_fechas["02"]="FEB";
+        array_fechas["03"]="MAR";
+        array_fechas["04"]="APR";
+        array_fechas["05"]="MAY";
+        array_fechas["06"]="JUN";
+        array_fechas["07"]="JUL";
+        array_fechas["08"]="AUG";
+        array_fechas["09"]="SEP";
+        array_fechas["10"]="OCT";
+        array_fechas["11"]="NOV";
+        array_fechas["12"]="DEC";
+        
+        return dia + array_fechas[mes]
+     },               
     creartexto(inpuText){
         var TextoAcolocar=document.createTextNode(inpuText);
         return TextoAcolocar;
