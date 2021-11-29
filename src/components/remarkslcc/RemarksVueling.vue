@@ -200,11 +200,14 @@ this.array_SS=[]
 
 // Obtenemos todos los datos que necesitamos del texto introducido por el usuario
     var numeros_vuelo=valor_textoArea.match(/(VY)\d{1,}(?=\n)/g);
-    var localizador_v=KitPassive.buscar_Match(/(?<=Código de Reserva\:\s{2,}).*/,valor_textoArea);
+    var localizador_v=KitPassive.buscar_Match(/(?<=(Código de Reserva\:\s{2,}|Código de reserva|Código de reserva\s{1}))\w{1,}/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\t{0,})\d{2}\:\d{2}/g);
-    var input_ciudad=valor_textoArea.match(/(?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()\w{3,}(?=\)\:(\n|))/g)
-    var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}/g)
+    var input_ciudad=valor_textoArea.match(/((?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()\w{3,}(?=\)\:(\n|))|(?<=\w{1,}\s\((\w{1,}\))\n)\w{3})|(?<=\w{1,}\n)\w{3}(?=\d{2}\:\d{2})|\w{3}(?=\n\d{2}\:\d{2})/g)
+    var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}|.*\,\s\d{2}\s\w{1,}\,\s\d{4}/g)
     // var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
+    var fecha_depurada=KitPassive.TransforDate(fechas);
+  
+
      var numeroPersona=prompt("Número de pasajeros");
      //ESTE CAMPO ES OBLIGATORIO POR LO QUE SI NO SE COMPLETA NO PODRÁ CONTINUAR
     if(numeroPersona===null||numeroPersona===''){
@@ -237,8 +240,10 @@ this.Ida.Localizador=ida_localizador
 
 // CONTRUIMOS LOS SEGMENTOS SS
 
+
+
         //TRATAMOS LAS FECHAS PARA CAMBIAR SU FORMATO PAR QUE SEA ADMISIBLE PARA AMADEUS.
-           let fechaIdaAmadeus=KitPassive.TransforDate(fechas[0])  
+           let fechaIdaAmadeus=fecha_depurada[0]
            
         //QUITAMOS LOS PUNTOS DE LA HORA
          ida_horaDeSalida=ida_horaDeSalida.replace(":",'')
@@ -276,7 +281,7 @@ this.Ida.Localizador=ida_localizador
                 this.Vuelta.Localizador=Vuelta_localizador
 
                    //TRATAMOS LAS FECHAS PARA CAMBIAR SU FORMATO PAR QUE SEA ADMISIBLE PARA AMADEUS.
-                  let fechaVueltaAmadeus=KitPassive.TransforDate(fechas[1])    
+                  let fechaVueltaAmadeus=fecha_depurada[1]
 
 
                      //QUITAMOS LOS PUNTOS DE LA HORA

@@ -2,25 +2,77 @@ export default {
                     //ESTA FUNCION NOS SIRVE PARA CREAR UN TEXTO 
 
      TransforDate(date){
-        let dia=this.buscar_Match(/^\d{2}/,date)
-        let mes=this.buscar_Match(/(?<=^\d{2}\/)\d{2}/,date)
-        let year=this.buscar_Match(/(?<=^\d{2}\/\d{2}\/)\d{4}/,date)
-        let array_fechas=[];
-        array_fechas["01"]="JAN";
-        array_fechas["02"]="FEB";
-        array_fechas["03"]="MAR";
-        array_fechas["04"]="APR";
-        array_fechas["05"]="MAY";
-        array_fechas["06"]="JUN";
-        array_fechas["07"]="JUL";
-        array_fechas["08"]="AUG";
-        array_fechas["09"]="SEP";
-        array_fechas["10"]="OCT";
-        array_fechas["11"]="NOV";
-        array_fechas["12"]="DEC";
+            //varibles 
+            let dia
+            let mes
+            let year    
+            let resultado=[]
+
+            let expre=/.*\,\s\d{2}\s\w{1,}\,\s\d{4}/
+            let testLetras=expre.test(date[0])
+            console.log(testLetras)
+            if(testLetras){
+                date.map((fecha)=>{
+
+
+dia=this.buscar_Match(/(?<=\,\s)\d{2}(?=\s\w)/,fecha)
+mes=this.buscar_Match(/(?<=\,\s\d{2}\s)\w{1,}/,fecha)
+let array_fechas_letra=[];
+   array_fechas_letra["Enero"]="JAN";
+   array_fechas_letra["Febrero"]="FEB";
+   array_fechas_letra["Marzo"]="MAR";
+   array_fechas_letra["Abril"]="APR";
+   array_fechas_letra["Mayo"]="MAY";
+   array_fechas_letra["Junio"]="JUN";
+   array_fechas_letra["Julio"]="JUL";
+   array_fechas_letra["Agosto"]="AUG";
+   array_fechas_letra["Septiembre"]="SEP";
+   array_fechas_letra["Octubre"]="OCT";
+   array_fechas_letra["Noviembre"]="NOV";
+   array_fechas_letra["Diciembre"]="DEC";
+  
+   resultado.push(dia+array_fechas_letra[mes])
+
+
+                })
+      
+
+            }else{
+               date.map((fecha)=>{
+                dia=this.buscar_Match(/^\d{2}/,fecha);
+                mes=this.buscar_Match(/(?<=^\d{2}\/)\d{2}/,fecha);
+                // year=this.buscar_Match(/(?<=^\d{2}\/\d{2}\/)\d{4}/,fecha);
+
+                let array_fechas=[];
+                array_fechas["01"]="JAN";
+                array_fechas["02"]="FEB";
+                array_fechas["03"]="MAR";
+                array_fechas["04"]="APR";
+                array_fechas["05"]="MAY";
+                array_fechas["06"]="JUN";
+                array_fechas["07"]="JUL";
+                array_fechas["08"]="AUG";
+                array_fechas["09"]="SEP";
+                array_fechas["10"]="OCT";
+                array_fechas["11"]="NOV";
+                array_fechas["12"]="DEC";
+                resultado.push(dia+array_fechas[mes])
+               })
+            }
+
+               
+           
+            //dia + array_fechas[mes]
+            return resultado
+      
+
         
-        return dia + array_fechas[mes]
-     },               
+        //  console.log(date)
+
+      
+     
+    
+    },               
     creartexto(inpuText){
         var TextoAcolocar=document.createTextNode(inpuText);
         return TextoAcolocar;
