@@ -219,6 +219,8 @@ this.array_SS=[]
         if(delimitador){
                 importeBruto=importeBruto.replace(",",".");
                         }
+
+                     
 //Declaramos las variables para tener un lectura mas facil del codigo.
     let ida_numeroVuelo=numeros_vuelo[0]
     let ida_fechaDeSalida=fechas[0]
@@ -259,6 +261,7 @@ this.Ida.Localizador=ida_localizador
 //CREAMOS UNA VALIDACIÓN PARA DETERMINAR SI HAY VUELTA EN LA RESERVA 
             //USAREMOS LA VARIBLE FECHAS PARA VER EL RANGO DEL ARRAY SI ES MAYOR A 1 SIGNIFICA QUE HAY VUELTA TAMBIEN , SI SOLO ES 1 SIGNIFICA QUE SOLO HAY IDA.
             if(fechas.length > 1){
+                console.log(horas_vuelos)
                 //activamos la tabla para que sea visible(se complementa con computed)
                 this.Vuelta.Satatus=true
                  let Vuelta_numeroVuelo=numeros_vuelo[1]
@@ -266,8 +269,8 @@ this.Ida.Localizador=ida_localizador
                 let Vuelta_ciudadSalida=input_ciudad[2]
                 let Vuelta_ciudadLlegada=input_ciudad[3]
                 let Vuelta_numeroPasajeros=numeroPersona
-                let Vuelta_horaDeSalida=horas_vuelos[1]
-                let Vuelta_horaDeLlegada= horas_vuelos[2]
+                let Vuelta_horaDeSalida=horas_vuelos[2]
+                let Vuelta_horaDeLlegada= horas_vuelos[3]
                 let Vuelta_localizador=localizador_v
                 //ASIGNAMOS LAS VARIABLES AL CUADRO DE VUELTA PARA QUE SE AVISIBLES PARA EL USUARIO.
                 this.Vuelta.numeroVuelo=Vuelta_numeroVuelo
