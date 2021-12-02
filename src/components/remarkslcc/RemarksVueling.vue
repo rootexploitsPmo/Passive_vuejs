@@ -202,7 +202,7 @@ this.array_SS=[]
     var numeros_vuelo=valor_textoArea.match(/(VY)\d{1,}(?=\n)/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=(Código de Reserva\:\s{2,}|Código de reserva|Código de reserva\s{1}))\w{1,}/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\t{0,})\d{2}\:\d{2}/g);
-    var input_ciudad=valor_textoArea.match(/((?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()\w{3,}(?=\)\:(\n|))|(?<=\w{1,}\s\((\w{1,}\))\n)\w{3})|(?<=\w{1,}\n)\w{3}(?=\d{2}\:\d{2})|\w{3}(?=\n\d{2}\:\d{2})/g)
+    var input_ciudad=valor_textoArea.match(/((?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()[A-Z]{3,}(?=\)\:(\n|))|(?<=\w{1,}\s\((\w{1,}\))\n)[A-Z]{3})|(?<=\w{1,}\n)[A-Z]{3}(?=\d{2}\:\d{2})|\w{3}(?=\n\d{2}\:\d{2})/g)
     var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}|.*\,\s\d{2}\s\w{1,}\,\s\d{4}/g)
     // var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
     var fecha_depurada=KitPassive.TransforDate(fechas);
@@ -213,7 +213,7 @@ this.array_SS=[]
     if(numeroPersona===null||numeroPersona===''){
         return
     }
-    var importeBruto=KitPassive.buscar_Match(/(?<=Importe\:)\d{1,}(\,\d{1,}|\.\d{1,}|)/,valor_textoArea)
+    var importeBruto=KitPassive.buscar_Match(/(?<=(Importe|Total)\:(\s|))\d{1,}(\,\d{1,}|\.\d{1,}|)/,valor_textoArea)
     //preguntamos si en el importe hay un punto o una coma para remplazar en caso de que  haya coma por un punto.
     var delimitador=/\,/.test(importeBruto);
         if(delimitador){

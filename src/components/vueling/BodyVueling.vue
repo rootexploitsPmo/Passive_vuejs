@@ -97,7 +97,7 @@
         <tbody >
         <tr>
             <td>Segmento Vuelos</td>
-            <td ><input  class="SegmentoV"  v-model="Segmentos.numeroSegmento"></td>
+            <td ><input :style="segmentoError" class="SegmentoV"  v-model="Segmentos.numeroSegmento"></td>
         </tr>
        
         <tr>
@@ -190,6 +190,7 @@ components: {
             this.array_SS=[]
 
         // REINICIAMOS LOS CAMPOS CADA VEZ QUE GENERE UNO NUEVO 
+       
     var valor_textoArea=data;
     var numeros_vuelo=valor_textoArea.match(/(?<=Vuelo\s{0,}VY)\d{1,}|(?<=VY)\d{1,}/g);
     var numeros_de_billetes=valor_textoArea.match(/(?<=Ticket\sVueling\s\d{3})\d{1,}(?=\d)/g);
@@ -259,13 +260,11 @@ components: {
    this.array_SS.push(LineaIda);
 
    //vuelta
+
         var HayVuelta=/Vuelta|BasicVuelo\s{0,}2/.test(valor_textoArea);//comprobamos que hay vuelta en la solicitud 
         if(HayVuelta===true){
            this.Vuelta.Satatus=true
-           }else{
-               this.Vuelta.Satatus=false;
-           }
-
+          
 
 this.Vuelta.numeroVuelo=numeros_vuelo[1]
 this.Vuelta.fechaSalida=fechas[1]
@@ -295,6 +294,7 @@ this.Vuelta.Localizador=localizador_v
                                  fecha_Mes=/(?<=(\d\d|\d)\s)\w{1,}/.exec(fechas[1]);
                                  
                                  fecha_numero=/(?<=\w{0,}\,\s{0,})\d{1,}|(?<=)\d{1,}/.exec(fechas[1]);
+                                 console.log(fechas[1],fecha_numero)
                                 if(fecha_numero[0].length<=1){
                                    
                                   fecha_numero[0]="0"+fecha_numero[0];
@@ -328,6 +328,9 @@ this.Vuelta.Localizador=localizador_v
 this.array_SS.push(LineaVuelta)
 
 console.log(this.array_SS)
+ }else{
+               this.Vuelta.Satatus=false;
+           }
 
 //  CALCULO DE IMPORTE 
 
@@ -349,10 +352,14 @@ var tax_v=KitPassive.buscar_Match(/(?<=Tasas\s)\d{1,}\,\d{1,}|(?<=Tasas)\d{1,}\,
                                         this.Segmentos.Tax=TAX;
 
                                         ///ASIGNAMOS LOS NUMEROS DE BILLETES PARA UTILIZARLOS EN LOS SEGMENTOS 
+                                        console.log(numeros_de_billetes)
                                         this.arrayNumeroBilletes=numeros_de_billetes
     },GetSegmentos(){
        
         var numeroSegmento=this.Segmentos.numeroSegmento
+        if(numeroSegmento!=""){
+
+       
         var Localizador=this.Localizador
             var rmacc="RM*ACC"+Localizador+"/s"+numeroSegmento;
             var rmacempn="RM*ACEMPN-"+Localizador+"/s"+numeroSegmento;
@@ -375,8 +382,11 @@ var tax_v=KitPassive.buscar_Match(/(?<=Tasas\s)\d{1,}\,\d{1,}|(?<=Tasas)\d{1,}\,
 if (this.Segmentos.Sobremision!="") {
     this.array_segmentos.push(rmacecom,pscscom)
 }
-     console.log(this.array_segmentos,this.arrayNumeroBilletes)
-     
+  
+      }else{
+
+            alert("Es necesario  segmento")
+      }
       //RESETEAMOS LOS ARRAY PARA NO ACOMULAR LOS DATOS
          
          this.array_segmentos=[]
@@ -385,6 +395,7 @@ if (this.Segmentos.Sobremision!="") {
      
      }
 },computed: {
+    
   activar(){
    return [this.Vuelta.Satatus ? {'display': 'inline-table'} : {'display':' none'} ]
   }
