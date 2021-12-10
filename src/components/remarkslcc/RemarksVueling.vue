@@ -7,7 +7,7 @@
    <div class="respuesta_Ryanair">
     <div id="contenido-ruta" class="contenido-ruta" data-children-count="1">
     <table id="ida">
-        <tbody><tr><td style="font-size: 25px; text-align: center;">IDA</td></tr>
+        <tbody><tr><td style="font-size: 25px; text-align: center;">{{titulovueloStatus ? "VUELO 1":"IDA"}}</td></tr>
         <tr>
             <td>Compañía</td>
             <td id="compa">VY</td>
@@ -49,7 +49,7 @@
         </tr>
     </tbody></table>
     <table  :style="activar">
-            <tbody><tr><td style="font-size: 25px; text-align: center;">VUELTA</td></tr>
+            <tbody><tr><td style="font-size: 25px; text-align: center;">{{titulovueloStatus ? "VUELO 2":"VUELTA"}}</td></tr>
             <tr>
                 <td>Compañía</td>
                 <td>VY</td>
@@ -180,7 +180,8 @@ export default {
           Sobremision:'',
           },
           array_segmentos:[],
-          arrayVariablesG:[]
+          arrayVariablesG:[],
+          titulovueloStatus:false
       }
     },
 components: {
@@ -203,9 +204,16 @@ this.array_SS=[]
     var localizador_v=KitPassive.buscar_Match(/(?<=(Código de Reserva\:\s{2,}|Código de reserva|Código de reserva\s{1}))\w{1,}/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\t{0,})\d{2}\:\d{2}/g);
     var input_ciudad=valor_textoArea.match(/((?<=\w{1,}\s{1,}(\(\w{1,}\)\s|)\()[A-Z]{3,}(?=\)\:(\n|))|(?<=\w{1,}\s\((\w{1,}\))\n)[A-Z]{3})|(?<=\w{1,}\n)[A-Z]{3}(?=\d{2}\:\d{2})|[A-Z]{3}(?=\n\d{2}\:\d{2})|(?<=\()[A-Z]{3}(?=\))/g)
-    var fechas =valor_textoArea.match(/(?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}|.*\,\s\d{2}\s\w{1,}\,\s\d{4}/g)
+    var fechas =valor_textoArea.match(/((?<=(Ida|Vuelta)\:\s{0,})\d{2}\/\d{2}\/\d{4}|.*\,\s\d{2}\s\w{1,}\,\s\d{4})|(?<=Vuelo\s\d\:)\d{2}\/\d{2}\/\d{4}/g)
     // var numeroPersona=valor_textoArea.match(/\n[0-9]\w\s{1}(?!\n)/g);
     var fecha_depurada=KitPassive.TransforDate(fechas);
+
+    //Creamos una validación para saber si es un ida y vuelta o vuelo 1 y vuelo 2 , de modo  que podamos cambiar el titutlo de las tablas
+    var tituloVuelotest=/Vuelo\s\d\:(?=\d{2}\/\d{2}\/\d{4})/.test(valor_textoArea)
+    if(tituloVuelotest){
+        this.titulovueloStatus=true
+    }
+    console.log(tituloVuelotest)
   
 
      var numeroPersona=prompt("Número de pasajeros");
