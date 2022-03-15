@@ -125,7 +125,7 @@ function creartexto(inpuText){
         var divisa_sin_Spacio=quitarSpacio(divisa[i]);
         var ciudad_origen_R=normalize(ciudad_origen[i]);
         var ciudad_destino_R=normalize(ciudad_destino[i]);
-        var lineas="RU 1A HK1 "+input_agente+" "+fechas_AMADEUS+"-OTROS-TREN/CIA-90494/TARIFA-"+divisa_sin_Spacio+"/LC-"+localizador[i]+"/TXT-"+ciudad_origen_R+"-"+ciudad_destino_R;
+        var lineas="RU 1A HK1 "+input_agente+" "+fechas_AMADEUS+"-OTROS-TRENINTERN/CIA-90494/TARIFA-"+divisa_sin_Spacio+"/LC-"+localizador[i]+"/TXT-"+ciudad_origen_R+"-"+ciudad_destino_R;
         //imprimimos en pantalla
       this.array_data.push(lineas)
     }
