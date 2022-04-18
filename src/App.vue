@@ -17,7 +17,7 @@ export default {
 </script>
 <style>
 .ContenedorPrincipal-component {
-    height: 100vh;
+    
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 69%;
