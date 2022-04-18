@@ -192,16 +192,7 @@ computed: {
 </script>
 
 <style>
-.ContenedorPrincipal-component {
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 69%;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(10,1fr);
-    font-size: 40px;
-}
+
 .rutas{
     grid-column: 1;
     grid-row: 1/11;
