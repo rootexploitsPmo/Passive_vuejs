@@ -111,14 +111,14 @@ components: {
     font-size: 40px;
 }
 .rutas{
-    grid-column: 1;
+      grid-column: 1;
     grid-row: 1/11;
     background: #ff8787;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
     z-index: 2;
-
+    align-items: baseline;
+    height: 100vh;
 }
 .respuesta{
 grid-column: 2;

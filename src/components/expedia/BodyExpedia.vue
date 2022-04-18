@@ -193,17 +193,7 @@ computed: {
 
 <style>
 
-.rutas{
-    grid-column: 1;
-    grid-row: 1/11;
-    background: #ff8787;
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    z-index: 2;
-flex-flow: column;
-padding-top: 111px;
-}
+
 .respuesta_expedia{
 grid-column: 2;
     grid-row: 1/11;
