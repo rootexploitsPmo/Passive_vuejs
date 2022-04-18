@@ -1,5 +1,5 @@
 <template>
-  <div class="ContenedorPrincipal">
+  <div class="ContenedorPrincipal-component">
         <div class="rutas">
   <InputData @accion='Getdata'/>
   <div class="contenedor_alerta heartBeat" :style="alertaCohche">

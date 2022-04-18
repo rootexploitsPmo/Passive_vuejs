@@ -1,5 +1,5 @@
 <template>
-  <div class="ContenedorPrincipal">
+  <div class="ContenedorPrincipal-component">
     <div class="rutas">
     <InputData @accion="getData"/>
            
@@ -192,7 +192,7 @@ computed: {
 </script>
 
 <style>
-.ContenedorPrincipal {
+.ContenedorPrincipal-component {
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;

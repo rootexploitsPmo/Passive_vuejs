@@ -1,5 +1,5 @@
 <template>
-  <div class="ContenedorPrincipal">
+  <div class="ContenedorPrincipal-component">
         <div class="rutas">
              <!-- <div @click="load"  class="iraTras">BACK</div> -->
 <InputData @accion='GetData'/>
