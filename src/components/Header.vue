@@ -43,7 +43,7 @@ methods: {
     background-position: 0% 50%;
     background-repeat: no-repeat;
     padding: 20px;
-    position: fixed;
+   
     width: 100%;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
     z-index: 3;

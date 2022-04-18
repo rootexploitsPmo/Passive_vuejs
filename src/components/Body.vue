@@ -101,7 +101,7 @@ components: {
 
 <style>
 .ContenedorPrincipal {
-    height: 100vh;
+    height: auto;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 69%;
