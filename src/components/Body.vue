@@ -100,8 +100,13 @@ components: {
 </script>
 
 <style>
+/* para que no descofugure el apartado de rutas */
+.ContenedorPrincipal-component>div:nth-child(2) {
+    overflow: auto;
+}
+
 .ContenedorPrincipal {
-    height: auto;
+   height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 69%;
@@ -118,7 +123,7 @@ components: {
     justify-content: center;
     z-index: 2;
     align-items: baseline;
-    height: 100vh;
+    
 }
 .respuesta{
 grid-column: 2;
