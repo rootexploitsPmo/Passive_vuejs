@@ -10,6 +10,7 @@ import G200 from '../views/G200.vue'
 import PlannerIndra from '../views/PlannerIndra.vue'
 import Talgo from '../views/Talgo'
 import Roche from '../views/Roche'
+import Repsol from '../views/Repsol'
 
 Vue.use(VueRouter)
 
@@ -57,7 +58,13 @@ const routes = [
     path:'/roche',
     name:'roche',
     component: Roche
+  },
+  {
+    path:'/repsol',
+    name:'repsol',
+    component:Repsol
   }
+
 
   
 ]

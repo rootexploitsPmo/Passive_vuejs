@@ -29,12 +29,12 @@ components: {
 },
 methods: {
     GetData(data) {
-       var texto_valor=data;
+       let texto_valor=data;
     //reseteamos el array para no concatenar información de los futuras ejecuciones
     this.array_rms=[]
-var crearRM= (textrm,exprm)=>{
-var buscarmatch=KitPassive.buscar_Match(exprm,texto_valor);
-var crearRM=textrm+buscarmatch
+let crearRM= (textrm,exprm)=>{
+let buscarmatch=KitPassive.buscar_Match(exprm,texto_valor);
+let crearRM=textrm+buscarmatch
 console.log(buscarmatch)
 this.array_rms.push(crearRM);
 }
