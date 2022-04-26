@@ -51,7 +51,7 @@ this.array_rms.push(crearRM);
 
       //RM *ACECRM/SOLICITUD-inicio      
    
-      crearRM('RM *ACECRM/SOLICITUD-',/(?<=Identificador\s{0,}de\s{0,}solicitud\s{0,})\S{1,}/)
+      crearRM('RM *ACECRM/SOLICITUD-',/(?<=Identificador\s{0,}de\s{0,}solicitud\s{0,})\w{1,}(?=\n)/)
 
       //RM *ACECRM/SOLICITUD-fin
        
@@ -60,7 +60,7 @@ this.array_rms.push(crearRM);
       //RM *ACECRM/APPROV--fin
 
       //RM *ACECRM/TRSTAT-inicio
-      crearRM('RM *ACECRM/TRSTAT-',/(?<=Centro\s{0,}de\s{0,}coste\s{0,}\().*(?=\))/)
+      crearRM('RM *ACECRM/TRSTAT-',/(?<=(Centro\s{0,}de\s{0,}coste|Cost\s{0,}Center)\s{0,}\().*(?=\))/)
       //RM *ACECRM/TRSTAT-fin
       
       //RM *ACECRM/PROYECTO-inicio
