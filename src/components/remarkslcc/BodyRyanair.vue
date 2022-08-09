@@ -197,14 +197,14 @@ components: {
 // RESETEAMOS EL ARRAY SS PARA QUE NO SE QUEDEN GUARDADOS LOS DATOS DE LA 'SESION' ANTERIOR 
 this.array_SS=[]
 //El texto para analisar 
- 
+
  var valor_textoArea=data;
 
 // Obtenemos todos los datos que necesitamos del texto introducido por el usuario
     var numeros_vuelo=valor_textoArea.match(/(FR|VY)\d{1,}(?=\n)/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=Número de reserva\:\n).*/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\w{1,}\s{0,}\-\s{0,})\d{2}\:\d{2}\n/g);
-    var input_ciudad=valor_textoArea.match(/(?<=Llegada.*\n).*/g)
+    var input_ciudad=valor_textoArea.match(/(?<=(Llegada|llegada)(\s)\-\s\d{2}\:\d{2}\n).*/g)
    
     var ciudad=input_ciudad[0].match(/(?<=\()\w{1,4}[A-Za-z](?=\))/g);
     
@@ -225,6 +225,8 @@ this.horaSalida=horas_vuelos[0]
 this.horaLlegada=horas_vuelos[1]
 this.Localizador=localizador_v
 this.importeBruto=importeBruto
+
+
 //ASOCIAMOS LAS VARIABLES DE VDATA A LAS VARIABLES CREADAS CON LOS DATOS RECOLECTADOS 
 
 //CREAMOS FORMATOS DE FECHAS VALIDOS PARA QUE AMADEUS LO ACEPTE
@@ -276,7 +278,7 @@ this.importeBruto=importeBruto
 
 //DESARROLLO DEL APARTADO 'VUELTA' 
 
-   var numero_salidas=valor_textoArea.match(/Salida/g);
+   var numero_salidas=valor_textoArea.match(/(Salida|salida)/g);
     var n_veces=numero_salidas.length;
     if(n_veces===2){
       // ACTIVAMOS LA TABLA DE 'VUELTA' PARA MOSTRAR LOS DATOS
@@ -347,12 +349,13 @@ this.importeBruto=importeBruto
     this.array_SS.push(LineaVuelta);
     }
   
-  //DESARROLLO DE LA SEGUNDA PARTE 'SEGMENTOS'
+  //GUARDAMOS ESTAS VARIABLES PARA EL SEGMENTO
  this.arrayVariablesG.push(localizador_v,importeBruto)
+
   },
   Getsegmentos() {
     ///LIMPIAMOS EL ARRAY PARA QUE NO SE ACOMULEN LOS DATOS QUE YA NO QUEREMOSs
-  
+
     //DESARROLLO DE LA SEGUNDA PARTE 'SEGMENTOS'
     var localizador_v=this.arrayVariablesG[0]
     var importeBruto= this.arrayVariablesG[1]
