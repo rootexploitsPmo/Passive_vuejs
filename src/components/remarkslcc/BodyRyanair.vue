@@ -201,11 +201,11 @@ this.array_SS=[]
  var valor_textoArea=data;
 
 // Obtenemos todos los datos que necesitamos del texto introducido por el usuario
-    var numeros_vuelo=valor_textoArea.match(/(FR|VY)\d{1,}(?=\n)/g);
+    var numeros_vuelo=valor_textoArea.match(/(FR|VY)(\s{1,}|)\d{1,}(?=\n)/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=Número de reserva\:\n).*/,valor_textoArea);
     var horas_vuelos=valor_textoArea.match(/(?<=\w{1,}\s{0,}\-\s{0,})\d{2}\:\d{2}\n/g);
     var input_ciudad=valor_textoArea.match(/(?<=(Llegada|llegada)(\s)\-\s\d{2}\:\d{2}\n).*/g)
-   
+   debugger
     var ciudad=input_ciudad[0].match(/(?<=\()\w{1,4}[A-Za-z](?=\))/g);
     
     var fechas=valor_textoArea.match(/\d{2}\/\d{2}\/\d{4}/g);
