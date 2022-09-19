@@ -106,10 +106,7 @@
             <td>Importe Bruto</td>
             <td>{{importeBruto}}</td>
         </tr>
-            <tr>
-            <td>TTI/FEUR</td>
-            <td>{{importeBruto}}</td>
-        </tr>
+          
         <tr>
             <td>RM*PSCREF-</td>
             <td><input  class="SegmentoV" v-model="Segmentos.PSCREF"></td>
@@ -374,7 +371,7 @@ this.array_segmentos.push(rmacc,rmacempn,rmacempa,rmacesal);
   var fpcc_texto="FPCC"+this.Segmentos.FPCC;
   var acempt ="RM*ACEMPT-00.00/s"+this.Segmentos.numeroSegmento;
   var acecom = "RM*ACECOM-00.00/s"+this.Segmentos.numeroSegmento;
-  var ttiFeur="TTI/FEUR"+importeBruto
+ 
   if(this.Segmentos.PSCREF===""){
     rmpscref_texto=""
 } 
@@ -383,9 +380,9 @@ this.array_segmentos.push(rmacc,rmacempn,rmacempa,rmacesal);
         fpcc_texto=""
     } 
   if(this.Segmentos.Sobremision!=""){
-    this.array_segmentos.push(pscscom,rmacecom,rmacesup,rmacevo,rmpscref_texto,fpcc_texto,acempt,acecom,ttiFeur);
+    this.array_segmentos.push(pscscom,rmacecom,rmacesup,rmacevo,rmpscref_texto,fpcc_texto,acempt,acecom);
   }else{
-    this.array_segmentos.push(rmacesup,rmpscref_texto,rmacevo,fpcc_texto,acempt,acecom,ttiFeur)
+    this.array_segmentos.push(rmacesup,rmpscref_texto,rmacevo,fpcc_texto,acempt,acecom)
   }
   this.array_segmentos=[]
   }
