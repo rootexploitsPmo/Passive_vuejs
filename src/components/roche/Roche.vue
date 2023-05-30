@@ -47,9 +47,7 @@ this.array_rms.push(crearRM);
       crearRM('RM *ACECRM/R24-',/(?<=CUENTA\sDE\sGASTOS\s)\d{0,}/)
       //RM *ACECRM/R24-fin
 
-      //RM *ACECRM/R25-inicio
-      crearRM('RM *ACECRM/R25-',/(?<=Nº\nMOTIVO\s{0,}NO\s{0,}ANTELACION\s{0,})\w.*/)
-      //RM *ACECRM/R25-fin
+ 
 
       //RM *ACECRM/R26-inicio
       crearRM('RM *ACECRM/R26-',/(?<=EMPLEADO\sSOLICITANTE\sY\s)\d{0,}/)
@@ -67,9 +65,7 @@ this.array_rms.push(crearRM);
         crearRM('RM *ACECRM/REATRP-',/(?<=MOTIVO\s{0,}DEL\s{0,}VIAJE\s{0,})\w/)
       //RM *ACECRM/REATRP-fin
       
-      //RM *ACECRM/TQ3CD3-inico
-        crearRM('RM *ACECRM/TQ3CD3-',/(?<=\n)\d{0,}(?=\s{0,}\w\s{0,}\C\d{0,}\w{2})/)
-      //RM *ACECRM/TQ3CD3-fin
+    
       console.log(this.array_rms)
     }
 },
