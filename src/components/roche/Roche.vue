@@ -50,7 +50,7 @@ this.array_rms.push(crearRM);
  
 
       //RM *ACECRM/R26-inicio
-      crearRM('RM *ACECRM/R26-',/(?<=EMPLEADO\sSOLICITANTE\sY\s)\d{0,}/)
+     // crearRM('RM *ACECRM/R26-',/(?<=EMPLEADO\sSOLICITANTE\sY\s)\d{0,}/)
       //RM *ACECRM/R26-fin
 
       //RM *ACECRM/R27-inicio
