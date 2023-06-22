@@ -34,13 +34,14 @@ methods: {
     this.array_rms=[]
 let crearRM= (textrm,exprm)=>{
 let buscarmatch=KitPassive.buscar_Match(exprm,texto_valor);
+buscarmatch = buscarmatch!=undefined ? buscarmatch : "Valor no encontrado"
 let crearRM=textrm+buscarmatch
 console.log(buscarmatch)
 this.array_rms.push(crearRM);
 }
 
       //RM *ACECRM/R23-inicio      
-      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s)\d{0,}/)
+      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s.*\s)(\w{1,}(\.|\n)){2,}/)
       //RM *ACECRM/R23-fin
 
       //RM *ACECRM/R24-inicio
