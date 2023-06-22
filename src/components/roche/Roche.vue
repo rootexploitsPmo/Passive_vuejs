@@ -59,7 +59,7 @@ this.array_rms.push(crearRM);
       //RM *ACECRM/R27-fin 
 
       //RM *ACC inicio
-        crearRM('RM *ACC',/^\w\d{0,}/)
+        crearRM('RM *AC',/^\w\d{0,}/)
       //RM *ACC fin
 
       //RM *ACECRM/REATRP- inicioL
