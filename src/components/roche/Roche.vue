@@ -41,7 +41,7 @@ this.array_rms.push(crearRM);
 }
 
       //RM *ACECRM/R23-inicio      
-      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s.*\s)(\w{1,}(\.|\n)){2,}/)
+      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s.*\s)((\w{1,}(\.|\n)){2,}|\d{1,})/)
       //RM *ACECRM/R23-fin
 
       //RM *ACECRM/R24-inicio
