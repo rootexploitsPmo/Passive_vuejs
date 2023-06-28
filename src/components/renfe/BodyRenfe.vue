@@ -46,7 +46,7 @@ components: {
     var numero_veces=valor_Textoarea.match(/(?<=Billete\/Ticket:\S{0,}\s{0,})\d{0,}|(?<=Nº\s{0,}Billete:\s{0,})\w{1,}(?=\s|\n)/g); // CONTIENE EL NUMERO DE BILLETES ENCONTRADOS
     
     
-    var rm_billete_tarifa=valor_Textoarea.match(/\w{1,}.*(?=\sT\.C|\sMetalico)/g); //CONTIENE EL CONTENIDO DE LOS BILLETES ENCONTRADOS
+    var rm_billete_tarifa=valor_Textoarea.match(/\w{1,}.*(?=\sT\.C|\s(Metálico|Metalico))/g); //CONTIENE EL CONTENIDO DE LOS BILLETES ENCONTRADOS
     //limpiamos el array de RM
     var rm_lista_tarifa=rm_billete_tarifa.map((x)=>{ // CON ESTE MAP CONSEGUIMOS SUSTITUIR O QUITAR EL SIGNO DEL EURO YA QUE NO LO NECESITAMOS
 
@@ -84,7 +84,7 @@ for(var i=1; i<=numero_veces.length; i++){
       }else{
         coches[contadorCero_tk]="00"+coches[contadorCero_tk];
       }
-      debugger
+      
       var plaza=valor_Textoarea.match(/(?<=Plaza:\s{0,})\d{1,}\w{1,}/g);
       var texto_plaza=/\d{2}/.exec(plaza[contadorCero_tk]);
       
@@ -98,7 +98,7 @@ for(var i=1; i<=numero_veces.length; i++){
       }
       
       var clases=valor_Textoarea.match(/(?<=Destino:\s{0,}\s{0}.*\n\w{1,}\s)(ESTÁNDAR|CONFORT)/g);
-      var tar=valor_Textoarea.match(/(.*)(?=\sT\.C|\sMetalico)/g);
+      var tar=valor_Textoarea.match(/(.*)(?=\sT\.C|\s(Metálico|Metalico))/g);
       console.log(numeros_de_tren)
       
       //s1t
@@ -140,7 +140,9 @@ if(array_rm_LC.length===2){
       var ultima_1="RM *ACC"+codLc;
        var ultima_2="RM*ACERNF-"+codLc;
        var ultima_3="RM*PNR HAS PASSED ROBOTICS";
-       var TC=/((?<=T\.C\.\:\s{0,})\S.*)|(?<=TARIFA.*)Metálico/.exec(valor_Textoarea)
+       var TC=/((?<=T\.C\.\:\s{0,})\S.*)|(Metálico|Metalico)/.exec(valor_Textoarea)
+       console.log([TC])
+       
        if(TC[0]==="Metalico"){
         TC[0]="CASH"
        }
