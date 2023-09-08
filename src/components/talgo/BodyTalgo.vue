@@ -44,7 +44,7 @@ components: {
       var valor_Textoarea = dato //CONTIENE EL TEXTO INTRODUCIDO POR EL USUARIO
         var verificacion_autorizada = /(?<=C\d{5}\d{8}\n)(Autorizada|Approved)/.test(valor_Textoarea);
 
-            if (verificacion_autorizada != false) {
+            if (verificacion_autorizada != true) {
                     alert("No se admiten solicitudes no autorizadas");
                     }else{ 
                         // limpiamos el array para que no se acomulen peticiones anteriores
