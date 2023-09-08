@@ -44,7 +44,7 @@ components: {
       var valor_Textoarea = dato //CONTIENE EL TEXTO INTRODUCIDO POR EL USUARIO
         var verificacion_autorizada = /(?<=C\d{5}\d{8}\n)(Autorizada|Approved)/.test(valor_Textoarea);
 
-            if (verificacion_autorizada != true) {
+            if (verificacion_autorizada != false) {
                     alert("No se admiten solicitudes no autorizadas");
                     }else{ 
                         // limpiamos el array para que no se acomulen peticiones anteriores
@@ -100,7 +100,7 @@ components: {
                         "RM*ACECRM/NOMBRE AUTORIZADOR-" + nombre_autorizador_valor;
 
                         this.array_hecho.push(nombre_autorizador_result);
-                        // CUARTO RM
+                        //  RM Centro de coste
                         var rm_centroCoste_valor = valor_Textoarea.match(
                         /(?<=\d{0,7}\s\-\s.*\n).*(?=\s\-)/g
                         );
@@ -113,7 +113,7 @@ components: {
                         var centro_de_coste_result =
                         "RM*ACECRM/CENTRO COSTE-" + rm_centroCoste_valor[0];
                         this.array_hecho.push(centro_de_coste_result);
-                        // QUINTO RM
+                        //   RM*ACECRM/REATRP-
                         var reatrp_valor = KitPassive.buscar_Match(
                         /CLIENT\sMTG|INTL\sMTG|OTHER|REPAIR\sMAINT|TRNG\sSEMINAR/,
                         valor_Textoarea
@@ -122,7 +122,7 @@ components: {
                         var reatrp_result = "RM*ACECRM/REATRP-" + reatrp_valor;
 
                         this.array_hecho.push(reatrp_result);
-                        //sexto RM
+                        //RM TQ3CD3
                         var TQ_rm_valor = KitPassive.buscar_Match(
                         /(?<=Porcentaje\s(.*\s))(\d{0,}\-\d{0,}|\d{0,})/,
                         valor_Textoarea
@@ -141,7 +141,33 @@ components: {
                         if (RM_imputacion_VALOR != undefined) {
                         this.array_hecho.push(RM_imputacion_result);
                         }
+                    //R23: RM*ACECRM/NOMBRE VIA-
+                    let nombreVia=KitPassive.buscar_Match(/(?<=NOMBRE VIA\s).*/,valor_Textoarea)
+                    let buildRmVia="RM*ACECRM/NOMBRE VIA-"+nombreVia
+                    if (buildRmVia != undefined) {
+                        this.array_hecho.push(buildRmVia);
+                        }
+                    //Numero
+                    let numeroVia=KitPassive.buscar_Match(/(?<=NUMERO\s).*/,valor_Textoarea)
+                    let buildnumeroVia=" RM*ACECRM/NUMERO-"+numeroVia
+                    if (buildnumeroVia != undefined) {
+                        this.array_hecho.push(buildnumeroVia);
+                        }
+                    
                     }
+                    // RM*ACECRM/LOCALIDAD-POBLACION-
+                    let localidadPoblacion=KitPassive.buscar_Match(/(?<=LOCALIDAD-POBLACION-\s).*/,valor_Textoarea)
+                    let buildlocalidadPoblacion="RM*ACECRM/LOCALIDAD-POBLACION-"+localidadPoblacion
+                    if (buildlocalidadPoblacion != undefined) {
+                        this.array_hecho.push(buildlocalidadPoblacion);
+                        }
+                     // RM*ACECRM/CODIGO POSTAL-
+                     let codigoPostal=KitPassive.buscar_Match(/(?<=CODIGO POSTAL\s).*/,valor_Textoarea)
+                    let buildcodigoPostal="RM*ACECRM/CODIGO POSTAL-"+codigoPostal
+                    if (buildcodigoPostal != undefined) {
+                        this.array_hecho.push(buildcodigoPostal);
+                        }
+                    
                     console.log(this.array_hecho);
 }
 }
