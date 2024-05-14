@@ -101,10 +101,11 @@ let rm=`RM*ACECRM/REATRP-${array_fechas[reatrp]};`
         let rm=`RM*ACECRM/REATRP-NO ENCONTRADO ❌`
         this.rms.push(rm)
     }
+    allRms= allRms.concat(`RM*MODIFIED BY AGENT;AP//////////TKT YA EMITIDO SIN SINCRO////////`)
     this.copy.push(allRms)
 console.log(allRms);
-
-
+  this.rms.push(`RM*MODIFIED BY AGENT`)
+  this.rms.push(`AP//////////TKT YA EMITIDO SIN SINCRO////////`)
 
 
     },
