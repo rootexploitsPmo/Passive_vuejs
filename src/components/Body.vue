@@ -54,6 +54,9 @@ export default {
       {
         titulo:'G200',
         url:'/g200'
+      },{
+        titulo:'Concur',
+        url:'/concur'
       }
     ]
     ,

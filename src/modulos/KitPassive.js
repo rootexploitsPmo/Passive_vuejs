@@ -90,7 +90,8 @@ let array_fechas_letra=[];
         
                     }
                     else{
-                        console.log("no match");
+                       
+                        return false
                     }
                     },
                   //ESTA FUNCION NOS SIRVE PARA LIMPIAR LOS ''-'' EN UNA CADENA DE TEXTO  

@@ -5,7 +5,8 @@
 <ContenedoresTexto v-for="(item,index) in rms" :key="index" :texto="item">
   
 </ContenedoresTexto>
-    <BotonCopiar :arrayDatos='rms'/>
+
+<BotonCopiar :arrayDatos='rms'/>
 
 </div>
 
@@ -16,7 +17,8 @@ import BotonCopiar from '../componentes_Funcionales/BotonCopiar'
 import ContenedoresTexto from './Contenedores_texto.vue'
 export default {
 props: {
-    rms:Array
+    rms:Array,
+    close:Boolean
   },
   components: {
     BotonCopiar,

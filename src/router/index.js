@@ -11,6 +11,8 @@ import PlannerIndra from '../views/PlannerIndra.vue'
 import Talgo from '../views/Talgo'
 import Roche from '../views/Roche'
 import Repsol from '../views/Repsol'
+import Concur from '../views/Concur'
+
 
 Vue.use(VueRouter)
 
@@ -64,7 +66,12 @@ const routes = [
     name:'repsol',
     component:Repsol
   }
-
+  ,
+  {
+    path:'/concur',
+    name:'concur',
+    component:Concur
+  }
 
   
 ]
