@@ -82,7 +82,7 @@ this.rms=[]
     var reatrp=valor_textoArea.match(/(?<=Tipo de viaje.*)\w{2,}.*(?=\n)/);
     if(reatrp!=null){
         var travelType = [];
-travelType["Viaje de negocios"] = "A";
+travelType["Viaje de Negocios"] = "A";
 travelType["Viaje Sindical"] = "D";
 travelType["INVITADO"] = "G";
 travelType["GRUPOS Y CONVENCIONES"] = "H";
