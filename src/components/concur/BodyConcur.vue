@@ -46,7 +46,7 @@ this.rms=[]
     if(solicitud!=null){
         let rm=`RM*ACECRM/SOLICITUD-${solicitud};`
         this.rms.push(rm)
-        allRms= allRms.concat(`RM*ACECRM/SOLICITUD-${rm};`)
+        allRms= allRms.concat(`${rm}`)
     
     }else{
         let rm=`RM*ACECRM/SOLICITUD-NO ENCONTRADO ❌`
@@ -81,19 +81,19 @@ this.rms=[]
     }
     var reatrp=valor_textoArea.match(/(?<=Tipo de viaje.*)\w{2,}.*(?=\n)/);
     if(reatrp!=null){
-        var array_fechas = [];
-array_fechas["COMISION DE SERVICIOS"] = "A";
-array_fechas["SINDICAL"] = "D";
-array_fechas["INVITADOS"] = "G";
-array_fechas["GRUPOS Y CONVENCIONES"] = "H";
-array_fechas["FORMACIÓN"] = "I";
-array_fechas["Viaje de Rotación"] = "J";
-array_fechas["COMERCIAL"] = "L";
-array_fechas["TRABAJO DE CAMPO"] = "M";
-array_fechas["EXPATRIADOS"] = "N";
-array_fechas["VIAJES PARA FAMILIARES"] = "R";
+        var travelType = [];
+travelType["Viaje de negocios"] = "A";
+travelType["Viaje Sindical"] = "D";
+travelType["INVITADO"] = "G";
+travelType["GRUPOS Y CONVENCIONES"] = "H";
+travelType["Viaje de Formación"] = "I";
+travelType["Viaje de Rotación"] = "J";
+travelType["COMERCIAL"] = "L";
+travelType["TRABAJO DE CAMPO"] = "M";
+travelType["EXPATRIADOS"] = "N";
+travelType["VIAJES PARA FAMILIARES"] = "R";
 
-let rm=`RM*ACECRM/REATRP-${array_fechas[reatrp]};`
+let rm=`RM*ACECRM/REATRP-${travelType[reatrp]};`
         this.rms.push(rm)
     allRms= allRms.concat(rm)
   
