@@ -97,7 +97,10 @@ for(var i=1; i<=numero_veces.length; i++){
 
       }
       
-      var clases=valor_Textoarea.match(/(?<=Destino:\s{0,}\s{0}.*\n\w{1,}\s)(ESTÁNDAR|CONFORT)/g);
+      //var clases=valor_Textoarea.match(/(?<=Destino:\s{0,}\s{0}.*\n\w{1,}\s)(ESTÁNDAR|CONFORT)/g);
+      
+      var clases=valor_Textoarea.match(/(ESTÁNDAR|CONFORT)/g);
+
       var tar=valor_Textoarea.match(/(.*)(?=\sT\.C|\s(Metálico|Metalico))/g);
       console.log(numeros_de_tren)
       
