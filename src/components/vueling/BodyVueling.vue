@@ -97,7 +97,9 @@
         <tbody >
         <tr>
             <td>Segmento Vuelos</td>
-            <td ><input :style="segmentoError" class="SegmentoV"  v-model="Segmentos.numeroSegmento"></td>
+            <td ><input class="SegmentoV"  v-model="Segmentos.numeroSegmento"></td>
+            <!-- <td><input :style="segmentoError" class="SegmentoV"  v-model="Segmentos.numeroSegmento"></td> -->
+        
         </tr>
 
         <tr>
@@ -199,7 +201,11 @@ components: {
     var fechas=valor_textoArea.match(/(?<=(Miércoles|Jueves|Viernes|Lunes|Martes|Sábado|Domingo)(\,|\s{0,})\s).*/g);
     var localizador_v=KitPassive.buscar_Match(/(?<=\w{1,}\s{0,}\d{1,}(\:|)(\s{0,}|)\w{1,}\ó\w{1,}\s{0,}\w{1,}\s{0,}\w{1,}\:\s{0,})\w{1,}|(?<=Código de reserva).*/,valor_textoArea);
     var numero_Asiento=numeros_de_billetes.length;
+    if(!localizador_v){
+        let respuestaUsuario = prompt("Por favor, ingresa localizador:");
+        localizador_v=respuestaUsuario
 
+}
     //asignamos la informacion extraida de la data
         this.numeroVuelo=numeros_vuelo[0]
         this.fechaSalida=fechas[0]
@@ -273,6 +279,7 @@ this.Vuelta.ciudadLlegada=ciudades[3]
 this.Vuelta.numeroAsientos=numeros_de_billetes.length
 this.Vuelta.horaSalida=horas_vuelos[2]
 this.Vuelta.horaLlegada=horas_vuelos[3]
+
 this.Vuelta.Localizador=localizador_v
 
 //CREAMOS FORMATOS VALIDOS PARA CREAR LA LINEAS QUE SE COMPIRARAN----------------------------VUELTA---------------------------------
@@ -335,6 +342,16 @@ console.log(this.array_SS)
 //  CALCULO DE IMPORTE
 
 var Importe_bruto_v=KitPassive.buscar_Match(/((?<=Precio total:\s)|((?<=Total:\s)))\d{1,}\,\d{1,}/,valor_textoArea);
+console.log("importe")                                        
+console.log(Importe_bruto_v)
+if(!Importe_bruto_v){
+// Pregunta al usuario y guarda la respuesta en una variable
+let respuestaUsuario = prompt("Por favor, ingresa precio total:");
+Importe_bruto_v=respuestaUsuario
+
+
+
+}
                                         Importe_bruto_v=Importe_bruto_v.replace(",",".");
                                         var importe=parseFloat(Importe_bruto_v);
 
@@ -344,7 +361,13 @@ var Importe_bruto_v=KitPassive.buscar_Match(/((?<=Precio total:\s)|((?<=Total:\s
                                         this.Segmentos.importe=Importe_bruto_final_f
 // CALCULAMOS EL TAX
 var tax_v=KitPassive.buscar_Match(/(?<=Tasas\s)\d{1,}\,\d{1,}|(?<=Tasas)\d{1,}\,\d{1,}/,valor_textoArea);
-                                            tax_v=tax_v.replace(",",".");
+                                          
+if(!tax_v){
+// Pregunta al usuario y guarda la respuesta en una variable
+let respuestaUsuario = prompt("Por favor, ingresa tasas:");
+tax_v=respuestaUsuario
+} 
+tax_v=tax_v.replace(",",".");
                                             var imTasas=parseFloat(tax_v);
 
                                         var tax_v_final=imTasas/numeros_de_billetes.length;
