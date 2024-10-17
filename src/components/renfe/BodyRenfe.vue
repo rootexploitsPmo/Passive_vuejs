@@ -39,7 +39,7 @@ components: {
     GetData(data){
      // console.log(data); contiene el texto para analisar
     var valor_Textoarea = data
-
+    
 // INICIO DE MIGRASION 
 
 //ESTE CONTENIDO CONTIENE LA SEGUNDA PARTE DE LOS RM LOS QUE USUAMOS EN  EL COMPONENTE PackRMS 
@@ -99,14 +99,18 @@ for(var i=1; i<=numero_veces.length; i++){
       
       //var clases=valor_Textoarea.match(/(?<=Destino:\s{0,}\s{0}.*\n\w{1,}\s)(ESTÁNDAR|CONFORT)/g);
       
-      var clases=valor_Textoarea.match(/(ESTÁNDAR|CONFORT)/g);
+      var clases=valor_Textoarea.match(/(ESTÁNDAR|CONFORT|TURISTA)/g);
 
       var tar=valor_Textoarea.match(/(.*)(?=\sT\.C|\s(Metálico|Metalico))/g);
       console.log(numeros_de_tren)
       
       //s1t
-      console.log("PLZ:"+plaza[contadorCero_tk]+" C:"+clases[contadorCero_tk]+" TAR:"+tar[contadorCero_tk])
-      console.log(" C:"+clases[contadorCero_tk])  
+      
+       console.log("PLZ:"+plaza[contadorCero_tk]+" C:"+clases[contadorCero_tk]+" TAR:"+tar[contadorCero_tk])
+
+
+      
+
       console.log("TAR:"+tar[contadorCero_tk])
 
       var primersegmento="RU1AHK1XZJ "+fecsal +"*RENFE-LC:"+codLc+" TK:"+numero_veces[contadorCero_tk]+ ", ORIG:"+ciudad_Origen[contadorCero_tk]+" "+horas[contadorCero]+", DEST:"+ciudad_Destino[contadorCero_tk]+" "+horas[conta_destino]+", TREN:"+numeros_de_tren[contadorCero_tk]+" "+transporte[contadorCero_tk]+",COCHE:"+coches[contadorCero_tk]+" PLZ:"+plaza[contadorCero_tk]+",C:"+clases[contadorCero_tk]+" TAR:"+tar[contadorCero_tk];
