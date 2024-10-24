@@ -61,7 +61,7 @@ this.rms=[]
         let rm=`RM*ACECRM/TRSTAT-NO ENCONTRADO ❌`
         this.rms.push(rm)
     }
-    var proyecto=valor_textoArea.match(/(?<=centro de coste :.*\().*(?=\))/);
+    var proyecto=valor_textoArea.match(/(?<=(centro de coste :|Objeto de Coste :).*\().*(?=\))/);
     if(proyecto!=null){
         let rm=`RM*ACECRM/PROYECTO-${proyecto};`
         this.rms.push(rm)
