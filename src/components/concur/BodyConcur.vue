@@ -62,8 +62,9 @@ this.rms=[]
         this.rms.push(rm)
     }
     var proyecto=valor_textoArea.match(/(?<=(centro de coste :|Objeto de Coste :).*\().*(?=\))/);
+    console.log(proyecto)
     if(proyecto!=null){
-        let rm=`RM*ACECRM/PROYECTO-${proyecto};`
+        let rm=`RM*ACECRM/PROYECTO-${proyecto[0]};`
         this.rms.push(rm)
     allRms= allRms.concat(rm)
     }else{
