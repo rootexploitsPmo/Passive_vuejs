@@ -99,14 +99,17 @@ for(var i=1; i<=numero_veces.length; i++){
       
       //var clases=valor_Textoarea.match(/(?<=Destino:\s{0,}\s{0}.*\n\w{1,}\s)(ESTÁNDAR|CONFORT)/g);
       
-      var clases=valor_Textoarea.match(/(ESTÁNDAR|CONFORT|TURISTA)/g);
+      var clases=valor_Textoarea.match(/(ESTÁNDAR|CONFORT|TURISTA|ESTANDAR)/g);
 
       var tar=valor_Textoarea.match(/(.*)(?=\sT\.C|\s(Metálico|Metalico))/g);
       console.log(numeros_de_tren)
       
       //s1t
-      
-       console.log("PLZ:"+plaza[contadorCero_tk]+" C:"+clases[contadorCero_tk]+" TAR:"+tar[contadorCero_tk])
+      console.log("PLZ:" + plaza[contadorCero_tk]);
+console.log("C:" + clases[contadorCero_tk]);
+console.log("TAR:" + tar[contadorCero_tk]);
+
+      //  console.log("PLZ:"+plaza[contadorCero_tk]+" C:"+clases[contadorCero_tk]+" TAR:"+tar[contadorCero_tk])
 
 
       
