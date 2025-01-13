@@ -214,6 +214,7 @@
                       })
                           
                        // RM*ACECRM/CODIGO POSTAL-
+                      //  let r=/(?<=CODIGO POSTAL\s).*|(?<=Código Postal / empresa en )\d{1,}(?=\n)/
                        let codigoPostal=this.buscarMatch(/(?<=CODIGO POSTAL\s).*/,valor_Textoarea,"RM*ACECRM/CODIGO POSTAL-",(res)=>{
                         this.listRM.push(`RM*ACECRM/CODIGO POSTAL-${res}`)
                        })

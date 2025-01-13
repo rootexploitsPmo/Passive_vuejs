@@ -41,11 +41,11 @@ this.array_rms.push(crearRM);
 }
 
       //RM *ACECRM/R23-inicio      
-      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s.*\s)((\w{1,}(\.|\n)){2,}|\d{1,})/)
+      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s.*\s)((\w{1,}(\.|\n)){2,}|\d{1,})|\w\d{1,}(?=.*WBS\sCECO)/)
       //RM *ACECRM/R23-fin
 
       //RM *ACECRM/R24-inicio
-      crearRM('RM *ACECRM/R24-',/(?<=CUENTA\sDE\sGASTOS\s)\d{0,}/)
+      crearRM('RM *ACECRM/R24-',/(?<=CUENTA\sDE\sGASTOS\s)\d{0,}|\d{1,}(?=\sCUENTA DE GASTOS)/)
       //RM *ACECRM/R24-fin
 
  
