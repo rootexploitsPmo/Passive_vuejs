@@ -90,12 +90,12 @@ components: {
 
                       }
                          
-                        
-                         var nameAuthorizer = /(?<=\d{1,}\s\-\s).*/.exec(authorizer)[0]
+                      alert(authorizer)
+                         var nameAuthorizer = /(?<=\d{1,}\s\-\s).*/.exec(authorizer)
                          alert(nameAuthorizer)
                          console.log(authorizer)
                          console.log(nameAuthorizer)
-                         let lengthNameAuthorizer=nameAuthorizer.length
+                         let lengthNameAuthorizer=nameAuthorizer[0].length
                          if(lengthNameAuthorizer >= 40){
                           let newValue=prompt("Agrege un nombre valido(maximo:40 caracteres):")
                            nameAuthorizer=newValue
