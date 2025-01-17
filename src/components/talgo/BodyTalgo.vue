@@ -67,12 +67,19 @@ components: {
                         console.log(rm_acc_result)
                         // TERCER RM -primera parte
                         var Listauthorizer =valor_Textoarea.match(/(?<=\n)\d{1,}\s\-\s(\w{1,}(\s|)){1,}(?=\n)/g)
+                        
                         var rmPeticionario =``
                         let authorizer="" 
+                        let peticionario=""
                         if(Listauthorizer!=null){
                             authorizer=Array.from(Listauthorizer).pop()
+                            peticionario=Listauthorizer[0]
+                            console.log("ok:")
+                            console.log(peticionario)
                         let getNamberauthorizer=/\d{1,}(?=\s\-)/.exec(authorizer)[0]
-                          rmPeticionario=`RM*ACECRM/N EMPLEADO PETICIONARIO-${getNamberauthorizer}`
+                        let getNamberPeticionario=/\d{1,}(?=\s\-)/.exec(peticionario)[0]
+
+                          rmPeticionario=`RM*ACECRM/N EMPLEADO PETICIONARIO-${getNamberPeticionario}`
                         
                         this.array_hecho.push(rmPeticionario);
                       }else{
@@ -102,11 +109,11 @@ components: {
                         console.log(rm_centroCoste_valor)
                         let rmCentroDecoste=""
                         if(rm_centroCoste_valor!=null){
-                          rmCentroDecoste=`RM*ACECRM/CENTRO COSTE- ${rm_centroCoste_valor[1]}`
+                          rmCentroDecoste=`RM*ACECRM/CENTRO COSTE-${rm_centroCoste_valor[1]}`
                           this.array_hecho.push(rmCentroDecoste);  
                         }else{
                           let newValue=prompt("Centro de coste:")
-                          rmCentroDecoste=`RM*ACECRM/CENTRO COSTE- ${newValue}`
+                          rmCentroDecoste=`RM*ACECRM/CENTRO COSTE-${newValue}`
                         }
                         
 
@@ -212,6 +219,7 @@ components: {
                     let buildcodigoPostal=''
                     if(codigoPostal!=false){
                       buildcodigoPostal="RM*ACECRM/CODIGO POSTAL-"+codigoPostal
+                      
                       this.array_hecho.push(buildcodigoPostal)
 
                     }else{
