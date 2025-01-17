@@ -92,6 +92,7 @@ components: {
                          
                         
                          var nameAuthorizer = /(?<=\d{1,}\s\-\s).*/.exec(authorizer)[0]
+                         alert(nameAuthorizer)
                          console.log(authorizer)
                          console.log(nameAuthorizer)
                          let lengthNameAuthorizer=nameAuthorizer.length
