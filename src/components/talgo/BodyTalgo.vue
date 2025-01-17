@@ -71,6 +71,10 @@ components: {
                         var rmPeticionario =``
                         let authorizer="" 
                         let peticionario=""
+                        console.log(`*****************`)
+                        console.log(valor_Textoarea)
+                        console.log(Listauthorizer)
+                        console.log(`*****************`)
                         if(Listauthorizer!=null){
                             authorizer=Array.from(Listauthorizer).pop()
                             peticionario=Listauthorizer[0]
@@ -90,9 +94,9 @@ components: {
 
                       }
                          
-                      alert(authorizer)
+                      
                          var nameAuthorizer = /(?<=\d{1,}\s\-\s).*/.exec(authorizer)
-                         alert(nameAuthorizer)
+                       
                          console.log(authorizer)
                          console.log(nameAuthorizer)
                          let lengthNameAuthorizer=nameAuthorizer[0].length
