@@ -66,7 +66,7 @@ components: {
                         console.log("RM*ACC")
                         console.log(rm_acc_result)
                         // TERCER RM -primera parte
-                        var Listauthorizer =valor_Textoarea.match(/(?<=\n)\d{1,}\s\-\s(\w{1,}(\s|)){1,}(?=\n)/g)
+                        var Listauthorizer =valor_Textoarea.match(/(?<=\n)\d{1,}\s\-\s([a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]{1,}(\s)){3,}/g)
                         
                         var rmPeticionario =``
                         let authorizer="" 
@@ -76,7 +76,7 @@ components: {
                         console.log(Listauthorizer)
                         console.log(`*****************`)
                         if(Listauthorizer!=null){
-                            authorizer=Array.from(Listauthorizer).pop()
+                            authorizer=Listauthorizer[1]
                             peticionario=Listauthorizer[0]
                             console.log("ok:")
                             console.log(peticionario)
