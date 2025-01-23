@@ -41,7 +41,7 @@ this.array_rms.push(crearRM);
 }
 
       //RM *ACECRM/R23-inicio      
-      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s\(Solo para\s).*/)
+      crearRM('RM *ACECRM/R23-',/(?<=WBS\sCECO\s\(Solo para\s).*(?=\nempleados)/)
       //RM *ACECRM/R23-fin
 
       //RM *ACECRM/R24-inicio
