@@ -46,34 +46,24 @@ components: {
         return motivo;
 }
       var valor_Textoarea = dato //CONTIENE EL TEXTO INTRODUCIDO POR EL USUARIO
-        var verificacion_autorizada = true
-        //var verificacion_autorizada = /(?<=C\d{5}\d{8}\n)(Autorizada|Approved)/.test(valor_Textoarea);
-            if (verificacion_autorizada != true) {
-                    alert("No se admiten solicitudes no autorizadas");
-                    }else{ 
+        var verificacion_autorizada = /(?<=C\d{5}\d{8}\n)(Autorizada|Approved)/.test(valor_Textoarea);
+
+           
                         // limpiamos el array para que no se acomulen peticiones anteriores
                         this.array_hecho=[]
                         //--fin
                         var rm_pscpet_valor = KitPassive.buscar_Match(/C\d{10,}(?=\n)/, valor_Textoarea);
                         var rm_pscpet_result = "RM*PSCPETVIAJE-" + rm_pscpet_valor;
-                        
                         this.array_hecho.push(rm_pscpet_result);
-                        console.log("RM*PSCPETVIAJE-")
-                        console.log(rm_pscpet_result)
-
                         //SEGUNDO RM
                         var rm_acc_valor = KitPassive.buscar_Match(/(?<=C\d{5})\d{8}/, rm_pscpet_result);
                         var rm_acc_result = "RM*ACC" + rm_acc_valor;
                         this.array_hecho.push(rm_acc_result);
-                        console.log("RM*ACC")
-                        console.log(rm_acc_result)
                         // TERCER RM -primera parte
                         var numero_autorizador_valor = KitPassive.buscar_Match(
                         /(?<=\D)\d{0,}(?=\s{0,}\-\s{0,}.*\n\C\d{0,}\s)/,
                         valor_Textoarea
                         );
-                        console.log("numero_autorizador_valor")
-                        console.log(numero_autorizador_valor)
                         if (numero_autorizador_valor === undefined) {
                         var texto1 =
                             "Numero de peticionario no encontrado,introduzcalo manualmente";
@@ -82,19 +72,13 @@ components: {
                         }
                         var numero_autorizador_result =
                         "RM*ACECRM/N EMPLEADO PETICIONARIO-" + numero_autorizador_valor;
-
                         this.array_hecho.push(numero_autorizador_result);
-                        console.log("RM*ACECRM/N EMPLEADO PETICIONARIO-")
-                        console.log(numero_autorizador_valor)
 
                         // TERCER RM -segunda parte
                         var nombre_autorizador_valor = KitPassive.buscar_Match(
                         /(?<=\D\d{0,}\s{0,}\-\s).*(\n\w{0,}|)(?=\n(\#\n|\F\.))/,
                         valor_Textoarea
                         );
-                        console.log("nombre_autorizador_valor")
-                        console.log(nombre_autorizador_valor)
-
                         var arranombre = nombre_autorizador_valor.split(" ");
                         var contadorN = 0;
                         console.log(arranombre[0].length);
@@ -118,15 +102,10 @@ components: {
                         "RM*ACECRM/NOMBRE AUTORIZADOR-" + nombre_autorizador_valor;
 
                         this.array_hecho.push(nombre_autorizador_result);
-                        console.log("RM*ACECRM/NOMBRE AUTORIZADOR-")
-                        console.log(nombre_autorizador_valor)
-                        //  RM Centro de coste
+                        // CUARTO RM
                         var rm_centroCoste_valor = valor_Textoarea.match(
                         /(?<=\d{0,7}\s\-\s.*\n).*(?=\s\-)/g
                         );
-                        console.log("rm_centroCoste_valor")
-                        console.log(rm_centroCoste_valor)
-
                         if (rm_centroCoste_valor === undefined) {
                         var texto1 = "Centro de coste no encontrado,introduzcalo manualmente";
                         var texto2 = "Centro de coste";
@@ -136,10 +115,7 @@ components: {
                         var centro_de_coste_result =
                         "RM*ACECRM/CENTRO COSTE-" + rm_centroCoste_valor[0];
                         this.array_hecho.push(centro_de_coste_result);
-                        console.log("RM*ACECRM/CENTRO COSTE-")
-                        console.log(rm_centroCoste_valor[0])
-
-                        //   RM*ACECRM/REATRP-
+                        // QUINTO RM
                         var reatrp_valor = KitPassive.buscar_Match(
                         /CLIENT\sMTG|INTL\sMTG|OTHER|REPAIR\sMAINT|TRNG\sSEMINAR/,
                         valor_Textoarea
@@ -148,17 +124,14 @@ components: {
                         var reatrp_result = "RM*ACECRM/REATRP-" + reatrp_valor;
 
                         this.array_hecho.push(reatrp_result);
-                        console.log("RM*ACECRM/REATRP-")
-                        console.log(reatrp_valor)
-                        //RM TQ3CD3
+                        //sexto RM
                         var TQ_rm_valor = KitPassive.buscar_Match(
                         /(?<=Porcentaje\s(.*\s))(\d{0,}\-\d{0,}|\d{0,})/,
                         valor_Textoarea
                         );
                         var TQ_rm_result = "RM*ACECRM/TQ3CD3-" + TQ_rm_valor;
                         this.array_hecho.push(TQ_rm_result);
-                        console.log("RM*ACECRM/TQ3CD3-")
-                        console.log(TQ_rm_valor)
+
                         //SEPTIMO RM
                         var RM_imputacion_VALOR = KitPassive.buscar_Match(
                         /(?<=Objeto de imputación\s\d{0,}\s)\S{0,}(?=\n)/,
@@ -166,51 +139,83 @@ components: {
                         );
                         var RM_imputacion_result =
                         "RM*ACECRM/OBJETO IMPUTACION 2-" + RM_imputacion_VALOR;
-                        console.log("RM*ACECRM/OBJETO IMPUTACION 2-")
-                        console.log(RM_imputacion_VALOR)
+
                         if (RM_imputacion_VALOR != undefined) {
                         this.array_hecho.push(RM_imputacion_result);
                         }
-                    //R23: RM*ACECRM/NOMBRE VIA-
-                    let nombreVia=KitPassive.buscar_Match(/(?<=NOMBRE VIA\s).*/,valor_Textoarea)
-                    let buildRmVia="RM*ACECRM/NOMBRE VIA-"+nombreVia
-                    console.log("RM*ACECRM/NOMBRE VIA-")
+                   
+                       //part 2
+
+                        let nombreVia=valor_Textoarea.match(/(?<=Nombre de la vía\/ empresa en).*(?=\n)/g) 
+                    console.log("nombreVia")
+                    
                     console.log(nombreVia)
-                        console.log(RM_imputacion_VALOR)
-                    if (buildRmVia != undefined) {
-                        this.array_hecho.push(buildRmVia);
-                        }
-                    //Numero
-                    let numeroVia=KitPassive.buscar_Match(/(?<=NUMERO\s).*/,valor_Textoarea)
-                    let buildnumeroVia="RM*ACECRM/NUMERO-"+numeroVia
-                    console.log("RM*ACECRM/NUMERO-")
-                    console.log(buildnumeroVia)
-
-                    if (buildnumeroVia != undefined) {
-                        this.array_hecho.push(buildnumeroVia);
-                        }
-                    
+                     let buildRmVia=""
+                    if(nombreVia!=null){
+                      if(nombreVia[0]!=''){
+                        buildRmVia = `RM*ACECRM/NOMBRE VIA-${nombreVia[0]}`
+                        this.array_hecho.push(buildRmVia);   
+                      }else{
+                        return
+                        let newValue=prompt("Nombre de la via:") 
+                      buildRmVia = `RM*ACECRM/NOMBRE VIA-${newValue}`
+                      this.array_hecho.push(buildRmVia);   
+                      }
+                    }else{
+                        return
+                      let newValue=prompt("Nombre de la via:") 
+                      buildRmVia = `RM*ACECRM/NOMBRE VIA-${newValue}`
+                      this.array_hecho.push(buildRmVia);   
                     }
-                    // RM*ACECRM/LOCALIDAD-POBLACION-
-                    let localidadPoblacion=KitPassive.buscar_Match(/(?<=LOCALIDAD-POBLACION-\s).*/,valor_Textoarea)
-                    let buildlocalidadPoblacion="RM*ACECRM/LOCALIDAD-POBLACION-"+localidadPoblacion
-                    console.log("RM*ACECRM/LOCALIDAD-POBLACION-")
-                    console.log(localidadPoblacion)
-
-                    if (buildlocalidadPoblacion != undefined) {
-                        this.array_hecho.push(buildlocalidadPoblacion);
-                        }
-                     // RM*ACECRM/CODIGO POSTAL-
-                     let codigoPostal=KitPassive.buscar_Match(/(?<=CODIGO POSTAL\s).*/,valor_Textoarea)
-                    let buildcodigoPostal="RM*ACECRM/CODIGO POSTAL-"+codigoPostal
-                    console.log("RM*ACECRM/CODIGO POSTAL-")
-                    console.log(codigoPostal)
-                    if (buildcodigoPostal != undefined) {
-                        this.array_hecho.push(buildcodigoPostal);
-                        }
                     
-                    console.log(this.array_hecho);
-}
+                    //(?<=Nº de la vía \/empresa en\s).*
+                    let nameStreetRoad=valor_Textoarea.match(/(?<=Nº de la vía \/empresa en\s).*(?=\ndestino)/g)
+                    
+                    let buildNamberStreetRoad=""
+                    if(nameStreetRoad!=null){
+                      buildNamberStreetRoad = `RM*ACECRM/NUMERO-${nameStreetRoad}`
+                      this.array_hecho.push(buildNamberStreetRoad);
+
+                    }else{
+                        return
+                      let newNamberStreetRoad=prompt("Número de via:")
+
+                      buildNamberStreetRoad= `RM*ACECRM/NUMERO-${newNamberStreetRoad}`
+                      this.array_hecho.push(buildNamberStreetRoad)
+                    }
+                    
+                    let localidadPoblacion=KitPassive.buscar_Match(/(?<=Localidad \/ empresa en\s).*(?=\ndestino)/,valor_Textoarea)
+                    let buildlocalidadPoblacion=''
+                    if(localidadPoblacion!=false){
+                        buildlocalidadPoblacion="RM*ACECRM/LOCALIDAD-POBLACION-"+localidadPoblacion
+                        this.array_hecho.push(buildlocalidadPoblacion)
+                    }else{
+                        return
+                      let newValue=prompt("LOCALIDAD-POBLACION:")
+                      buildlocalidadPoblacion="RM*ACECRM/LOCALIDAD-POBLACION-"+newValue
+                      this.array_hecho.push(buildlocalidadPoblacion)
+                    }
+
+                    let codigoPostal=KitPassive.buscar_Match(/(?<=Código Postal \/ empresa en\s).*(?=\ndestino)/,valor_Textoarea)
+                    let buildcodigoPostal=''
+                    if(codigoPostal!=false){
+                      buildcodigoPostal="RM*ACECRM/CODIGO POSTAL-"+codigoPostal
+                      
+                      this.array_hecho.push(buildcodigoPostal)
+
+                    }else{
+                        return
+                      let newValue=prompt("CODIGO POSTAL:")
+                      buildcodigoPostal="RM*ACECRM/CODIGO POSTAL-"+newValue 
+                      this.array_hecho.push(buildcodigoPostal)
+
+                    }
+                    
+                    
+                    
+ 
+                        console.log(this.array_hecho)
+    }
 }
 }
 </script>
