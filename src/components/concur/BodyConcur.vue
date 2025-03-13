@@ -45,7 +45,10 @@ this.rms=[]
     var solicitud=valor_textoArea.match(/(?<=Identificador de solicitud.*)\w{2,}(?=\n)/);
     if(solicitud!=null){
         let rm=`RM*ACECRM/SOLICITUD-${solicitud};`
+        let rmTravelRRequestid=`RM*TRAVELREQUESTID-${solicitud};`
+        this.rms.push(rmTravelRRequestid)
         this.rms.push(rm)
+        allRms= allRms.concat(`${rmTravelRRequestid}`)
         allRms= allRms.concat(`${rm}`)
     
     }else{
