@@ -12,7 +12,7 @@ import Talgo from '../views/Talgo'
 import Roche from '../views/Roche'
 import Repsol from '../views/Repsol'
 import Concur from '../views/Concur'
-
+import renderHTML from '../views/renderHTML.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +21,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/plantilla_alternativas',
+    name: 'Home',
+    component: renderHTML
   },
   {
     path: '/expedia',
